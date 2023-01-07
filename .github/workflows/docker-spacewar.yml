@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3.0.1
  
     - name: Install dependencies
       run: |
@@ -48,7 +48,7 @@ jobs:
         CHAT_ID:  ${{ secrets.CHAT_ID }}
  
     - name: Variable declaration
-      run: echo "::set-env name=ZIPNAME::kernel-denniz-$(date +%Y%m%d)-$(date +%H%M).zip"    
+      run: echo "::set-env name=ZIPNAME::kernel-Spacewar-$(date +%Y%m%d)-$(date +%H%M).zip"    
  
     - name: Pack
       run: |
