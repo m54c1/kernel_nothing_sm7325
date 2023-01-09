@@ -57,7 +57,7 @@ jobs:
     - name: Pack
       run: |
         git clone https://github.com/m54c1/AnyKernel3 --branch=master --depth=1
-        cp out/arch/arm64/boot/Image.gz-dtb AnyKernel3
+        cp out/arch/arm64/boot/Image AnyKernel3
         cd AnyKernel3
         ls -l
         zip -r9 "${ZIPNAME}" * -x README.md "${ZIPNAME}"
