@@ -6,13 +6,7 @@ on:
   workflow_dispatch:
  
 jobs:
-  
-test:
-    runs-on: self-hosted
-    env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-
-build:
+  build:
     runs-on: ubuntu-latest
  
     steps:
