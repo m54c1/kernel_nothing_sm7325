@@ -16,7 +16,7 @@ jobs:
     - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
       id: ACTIONS_ALLOW_UNSECURE_COMMANDS
       run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
-      
+
     - name: Install dependencies
       run: |
         sudo apt-get update -qq
@@ -28,16 +28,15 @@ jobs:
     - name: Get toolchains
       run: |
         mkdir clang
-        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r468909b.tar.gz
-        tar -C "clang" -xvzf clang-r468909b.tar.gz
-        git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1
+        git clone https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b clang --depth=1
+        git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 aarch64-linux-android-4.9 --depth=1
         git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1
  
     - name: Build
       run: |
         make O=out ARCH=arm64 vendor/lahaina-qgki_defconfig
         PATH="${PWD}/clang/bin:${PWD}/aarch64-linux-android-4.9/bin:${PATH}" \
-        make -j5 O=out \
+        make -j3 O=out \
               ARCH=arm64 \
               CLANG_TRIPLE=aarch64-linux-gnu- \
               CROSS_COMPILE=aarch64-linux-android- \
