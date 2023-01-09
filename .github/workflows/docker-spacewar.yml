@@ -28,8 +28,8 @@ jobs:
     - name: Get toolchains
       run: |
         mkdir clang
-        wget https://releases.linaro.org/components/toolchain/binaries/latest-7/aarch64-linux-gnu/gcc-linaro-7.5.0-2019.12-i686_aarch64-linux-gnu.tar.xz
-        tar -C "clang" -xvzf gcc-linaro-7.5.0-2019.12-i686_aarch64-linux-gnu.tar.xz
+        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/master/clang-r468909b.tar.gz
+        tar -C "clang" -xvzf clang-r468909b.tar.gz
         git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1
         git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1
  
@@ -37,7 +37,7 @@ jobs:
       run: |
         make O=out ARCH=arm64 vendor/lahaina-qgki_defconfig
         PATH="${PWD}/clang/bin:${PWD}/aarch64-linux-android-4.9/bin:${PATH}" \
-        make -j3 O=out \
+        make -j5 O=out \
               ARCH=arm64 \
               CLANG_TRIPLE=aarch64-linux-gnu- \
               CROSS_COMPILE=aarch64-linux-android- \
