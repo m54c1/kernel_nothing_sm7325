@@ -13,6 +13,10 @@ jobs:
 
     - uses: actions/checkout@v3.3.0
 
+    - name: ACTIONS_ALLOW_UNSECURE_COMMANDS
+      id: ACTIONS_ALLOW_UNSECURE_COMMANDS
+      run: echo 'ACTIONS_ALLOW_UNSECURE_COMMANDS=true' >> $GITHUB_ENV
+      
     - name: Install dependencies
       run: |
         sudo apt-get update -qq
@@ -24,8 +28,8 @@ jobs:
     - name: Get toolchains
       run: |
         mkdir clang
-        wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/android-11.0.0_r48/clang-r383902b1.tar.gz
-        tar -C "clang" -xvzf clang-r383902b1.tar.gz
+        wget https://releases.linaro.org/components/toolchain/binaries/latest-7/aarch64-linux-gnu/gcc-linaro-7.5.0-2019.12-i686_aarch64-linux-gnu.tar.xz
+        tar -C "clang" -xvzf gcc-linaro-7.5.0-2019.12-i686_aarch64-linux-gnu.tar.xz
         git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9 --depth=1
         git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9 --depth=1
  
